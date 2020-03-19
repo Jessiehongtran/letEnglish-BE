@@ -48,8 +48,25 @@ router.patch('/:id', (req, res) => {
 })
 
 
-
-
 // DELETE a note
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    console.log('id', id)
+    noteModel.getNoteById(id)
+            .then(note => {
+                console.log('note', note)
+                if (note){
+                    noteModel.deleteNote(id)
+                            .then(count => {
+                                res.status(200).json({messgae: `deleted ${count} note`})
+                            })
+                            .catch(err => res.status(500).json(err.message))
+                }
+                else {
+                    res.status(404).json({message: "node does not exist"})
+                }
+            })
+            .catch(err => res.status(500).json(err.message))
+})
 
 module.exports = router;

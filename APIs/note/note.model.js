@@ -23,9 +23,16 @@ function updateNote(id, change){
             .update(change)
 }
 
+function deleteNote(id){
+    return db("note")
+            .where({id: id})
+            .del()
+}
+
 module.exports = {
     getAll,
     addNote,
     getNoteById,
-    updateNote
+    updateNote,
+    deleteNote
 }
