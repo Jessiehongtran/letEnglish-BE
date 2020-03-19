@@ -6,9 +6,9 @@ function getAll(){
 
 function addNote(note){
     return db("note")
-            .returning("id")
+            // .returning("id")
             .insert(note)
-            .then(ids => {return {id: ids[0]}})
+            .then(ids => ({id: ids[0]}))
 }
 
 module.exports = {
