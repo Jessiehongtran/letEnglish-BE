@@ -2,8 +2,8 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('note', tbl => {
         tbl.increments();
-        tbl.text('content');
-        
+        tbl.string('content');
+        tbl.time('created_at')
     })
   
 };
