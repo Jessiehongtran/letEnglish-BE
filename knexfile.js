@@ -22,7 +22,7 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: './data/migrations'
+      tableName: './migrations'
     }
   },
 
