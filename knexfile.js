@@ -7,39 +7,24 @@ module.exports = {
     connection: {
       filename: './data/database.db3'
     },
-    useNullAsDefault: true
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+    useNullAsDefault: true,
+    migrations: {
+      directory: './migrations'
     },
     pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: './migrations'
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys = ON", done);
+      }
     }
-  }
+  },
 
-  // production: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'my_db',
-  //     user:     'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // }
+  production: {
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: "./migrations"
+    }
+  },
+  ssl: true
 
 };
